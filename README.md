@@ -1,7 +1,8 @@
 # crazy-keyboards - lab 1 - variant 3
 
-Group Member: Haixiao Wang 212320012
-              Yu Zhang     212320015
+Group Member: 
+- Haixiao Wang 212320012
+- Yu Zhang     212320015
 
 ## Variant description
 - set based on binary-tree, and check the implementation correctly works with None value.

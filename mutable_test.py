@@ -1,5 +1,4 @@
 import unittest
-from black import assert_equivalent
 from hypothesis import given
 import hypothesis.strategies as st
 
