@@ -92,7 +92,7 @@ class BinaryTree(object):
             queue = [self.root]
             while queue:
                 currNode = queue.pop(0)
-                if currNode.ele == item:     # if the item is already in the set
+                if currNode.ele == item:  # if the item is already in the set
                     print("the item is already in the set")
                     return False
                 elif currNode.ele > item:
