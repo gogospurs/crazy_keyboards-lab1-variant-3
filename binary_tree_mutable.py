@@ -1,19 +1,23 @@
 class TreeNode():
     '''the definition of tree node'''
-    def __init__(self, elem, left = None, right = None):
-        '''data is the value of the current node, left and right are left tree and right tree of current node'''
+
+    def __init__(self, elem, left=None, right=None):
         self.ele = elem
         self.left = left
         self.right = right
 
+
 class BinaryTree(object):
     '''initial function'''
-    def __init__(self, root = None):
-        self.root = root                                                    # initial the root as None
+
+    def __init__(self, root=None):
+        # initial the root as None
+        self.root = root
         self.stack = None
         self.it = None
 
     '''iter'''
+
     def __iter__(self):
         if self.root:
             self.it = 0
@@ -28,10 +32,11 @@ class BinaryTree(object):
                         self.stack.append(currNode.left)
                     if currNode.right:
                         queue.append(currNode.right)
-                        self.stack.append(currNode.right)            
+                        self.stack.append(currNode.right)
         return self.it
 
     '''next'''
+
     def __next__(self):
         if (self.it >= len(self.stack)) or (self.it is None):
             raise StopIteration
@@ -40,10 +45,11 @@ class BinaryTree(object):
             return self.it
 
     '''find the node which its elem equal to the item '''
+
     def findElem(self, item):
         parentNode = None
         currNode = None
-        if self.root == None:
+        if self.root is None:
             print("the set is empty")
             res = False
         else:
@@ -52,20 +58,23 @@ class BinaryTree(object):
                 currNode = queue.pop(0)
                 if currNode.ele == item:
                     res = True
-                    break                                                   # if item is equal to the root.ele, return node
+                    # if item is equal to the root.ele, return node
+                    break
                 elif currNode.ele > item:
-                    if currNode.left != None:
+                    if currNode.left is not None:
                         parentNode = currNode
-                        queue.append(currNode.left)                         # search the left child tree
-                    else:                                                   # the item is not in the set
+                        # search the left child tree
+                        queue.append(currNode.left)
+                    else:                 # the item is not in the set
                         currNode = None
                         parentNode = None
                         res = False
-                        break                      
+                        break
                 else:
-                    if currNode.right != None:  
+                    if currNode.right is not None:
                         parentNode = currNode
-                        queue.append(currNode.right)                        # search the right child tree
+                        # search the right child tree
+                        queue.append(currNode.right)
                     else:
                         parentNode = None
                         currNode = None
@@ -76,32 +85,39 @@ class BinaryTree(object):
     def add(self, item):
         '''add node to tree'''
         node = TreeNode(item)           # instance of the node
-        if(self.root == None):          # if the set is empty
+        if(self.root is None):          # if the set is empty
             self.root = node
-            return  True
+            return True
         else:
             queue = [self.root]
             while queue:
                 currNode = queue.pop(0)
-                if currNode.ele == item:                                # if the item is already in the set
+                if currNode.ele == item:     # if the item is already in the set
                     print("the item is already in the set")
-                    return  False
+                    return False
                 elif currNode.ele > item:
-                    if currNode.left:   queue.append(currNode.left)     # if the item is smaller than the currNode.ele
+                    if currNode.left:
+                        # if the item is smaller than the currNode.ele
+                        queue.append(currNode.left)
                     else:
                         currNode.left = node
-                        return  True
-                else:                                                   # if the item is larger than the currNode.ele
-                    if currNode.right:  queue.append(currNode.right)
-                    else:   
+                        return True
+                else:          # if the item is larger than the currNode.ele
+                    if currNode.right:
+                        queue.append(currNode.right)
+                    else:
                         currNode.right = node
-                        return  True
+                        return True
 
     '''delete the item'''
+
     def delete(self, item):
-        res, parentNode, currNode = self.findElem(item)                 # search the item wheather in the set
-        if res == False:    return False                                     # if item does not in the set, return false
-        else:  
+        # search the item wheather in the set
+        res, parentNode, currNode = self.findElem(item)
+        if not res:
+            # if item does not in the set, return false
+            return False
+        else:
             if currNode.left:
                 parentOfInsteadNode = currNode
                 insteadNode = currNode.left
@@ -113,7 +129,7 @@ class BinaryTree(object):
                     insteadNode.left = currNode.left
                 insteadNode.right = currNode.right
                 currNode.left = None
-                currNode.right = None              
+                currNode.right = None
             elif currNode.right:
                 parentOfInsteadNode = currNode
                 insteadNode = currNode.right
@@ -130,28 +146,37 @@ class BinaryTree(object):
             if parentNode:
                 if parentNode.left == currNode:
                     parentNode.left = insteadNode
-                else:   parentNode.right = insteadNode
-            else:   self.root = insteadNode
+                else:
+                    parentNode.right = insteadNode
+            else:
+                self.root = insteadNode
             return True
 
     '''size'''
+
     def getSize(self):
-        if self.root == None:    return 0                               # if the set is empty, return 0
-        else:                                                           # count the size
+        if self.root is None:
+            return 0        # if the set is empty, return 0
+        else:               # count the size
             size = 0
-            queue = [self.root]                                         # queue for count
+            # queue for count
+            queue = [self.root]
             while queue:
                 currNode = queue.pop(0)
                 size += 1
-                if currNode.left:   queue.append(currNode.left)
-                if currNode.right:  queue.append(currNode.right)
+                if currNode.left:
+                    queue.append(currNode.left)
+                if currNode.right:
+                    queue.append(currNode.right)
             return size
 
     '''to list'''
+
     def to_list(self):
         res = []
         self.__iter__()
-        if self.it is None: return res
+        if self.it is None:
+            return res
         else:
             while self.it < len(self.stack):
                 node = self.stack[self.it]
@@ -160,22 +185,26 @@ class BinaryTree(object):
         return res
 
     '''from list'''
+
     def from_list(self, tlist):
-        if tlist == []: return
+        if tlist == []:
+            return
         else:
             for i in tlist:
                 self.add(i)
-        return 
+        return
 
     '''filter, the rule is defined by func'''
+
     def filter(self, func):
         self.it = self.__iter__()
-        if self.it is None:   return
+        if self.it is None:
+            return
         else:
             de_stack = []
             while self.it < len(self.stack):
                 value = self.stack[self.it].ele
-                if func(value) == False:
+                if func(value) is False:
                     de_stack.append(self.stack[self.it])
                     self.stack.pop(self.it)
                 self.__next__()
@@ -184,19 +213,21 @@ class BinaryTree(object):
                 self.delete(item.ele)
             return
 
-
     '''map, the rule is defined by func'''
+
     def map(self, func):
         self.it = self.__iter__()
-        if self.it is None:   return 
+        if self.it is None:
+            return
         else:
             while self.it < len(self.stack):
                 currNode = self.stack[self.it]
                 currNode.ele = func(currNode.ele)
                 self.__next__()
-            return 
+            return
 
     '''reduce'''
+
     def reduce(self, func):
         it = self.__iter__()
         value = 0
@@ -206,10 +237,12 @@ class BinaryTree(object):
         return value
 
     '''mempty'''
+
     def mempty(self):
         return BinaryTree()
-        
+
     '''mconcat'''
+
     def mconcat(self, tree):
         BT = BinaryTree()
         if self.root and tree.root:
@@ -222,6 +255,9 @@ class BinaryTree(object):
                 BT.add(tree.stack[it2].ele)
                 it2 = tree.__next__()
             return BT
-        elif self.root == None and tree.root:    return tree
-        elif tree.root == None and self.root:    return self
-        else:   return BT
+        elif self.root is None and tree.root:
+            return tree
+        elif tree.root is None and self.root:
+            return self
+        else:
+            return BT

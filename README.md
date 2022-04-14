@@ -1,16 +1,18 @@
 # crazy-keyboards - lab 1 - variant 3
 
-Group Member: 
+Group Member:
+
 - Haixiao Wang 212320012
 - Yu Zhang     212320015
 
 ## Variant description
+
 - set based on binary-tree, and check the implementation correctly works with None value.
 
 ## Project structure
 
-- `binary_tree_mutable.py` -- implementation of `BinaryTree` mutable version 
-   
+- `binary_tree_mutable.py` -- implementation of `BinaryTree` mutable version
+
 - `mutable_test.py` -- unit and PBT tests for mutable binary tree
 
 ## Features
@@ -20,12 +22,12 @@ Group Member:
 
 ## Contribution
 
-- Yu Zhang -- source part
+- Yu Zhang -- source part and upload the files to github
 - Haixiao Wang -- test part
 
 ## Explanation of taken decision and analysis
 
-- The libarary mainly contains two parts, one is mutable object part, and the function in it will change the source object. 
+- The libarary mainly contains two parts, one is mutable object part, and the function in it will change the source object.
 
 ## Conclusion
 
