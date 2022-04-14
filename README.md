@@ -8,6 +8,7 @@ Group Member:
 ## Variant description
 
 - set based on binary-tree,
+
 and should check the implementation correctly works with None value.
 
 ## Project structure
@@ -19,7 +20,9 @@ and should check the implementation correctly works with None value.
 ## Features
 
 - PBT: `__iter__`, `__next__`, `findElem`, `add`,
+
 `delete`, `getSize`, `to_list`, `from_list`, `filter`, `map`,
+
 `reduce`, `monoid`, `intersection`
 
 ## Contribution
@@ -30,15 +33,21 @@ and should check the implementation correctly works with None value.
 ## Explanation of taken decision and analysis
 
 - The libarary mainly contains two parts,
+
 one is mutable object part,
+
 and the function in it will change the source object.
 
 ## Conclusion
 
 - First of all, in this lab,
+
 we met many problems that need to be considered as a library developer.
+
 An excellent container library should support functions of variable objects.
+
 Function, which helped us detect many problems,
+
 we also learned to use Hypothesis library to do the test.
 
 ## Changelog
