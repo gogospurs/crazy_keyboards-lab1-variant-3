@@ -23,7 +23,7 @@ and should check the implementation correctly works with None value.
 
 `delete`, `getSize`, `to_list`, `from_list`, `filter`, `map`,
 
-`reduce`, `monoid`, `intersection`
+`reduce`, `monoid`
 
 ## Contribution
 
