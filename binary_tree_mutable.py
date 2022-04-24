@@ -249,6 +249,6 @@ class BinaryTree(object):
             while it < len(tree.stack):
                 self.add(tree.stack[it].ele)
                 it = tree.__next__()
-            return 
+            return
         else:
-            return 
+            return
