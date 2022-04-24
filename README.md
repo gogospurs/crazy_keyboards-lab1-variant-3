@@ -60,4 +60,4 @@ we also learned to use Hypothesis library to do the test.
     - rename test file from the mutable_test to binary_tree_mutable_test.
     - add PBT to some test module.
     - modify the mconcat function to mutable version, and modify correspondding test.
-    - make sure the map function won't the source of undifined behavior.
+    - make sure the map function won't be the source of undifined behavior.
