@@ -19,11 +19,11 @@ and should check the implementation correctly works with None value.
 
 ## Features
 
-- PBT: `test_toAndfrom_list`, `test_findElem`, `test_add`, `test_delete`,
+- PBT: `test_toAndfrom_list`, `test_getSize`
 
-`test_getSize`, `test_filter`, `test_map`, `test_reduce`, `test_monoid`,
+- other test module: `test_findElem`, `test_add`, `test_delete`,
 
-`test_iter_next`
+`test_filter`, `test_map`, `test_reduce`, `test_monoid`, `test_iter_next`
 
 ## Contribution
 

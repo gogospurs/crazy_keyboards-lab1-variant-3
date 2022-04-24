@@ -15,15 +15,19 @@ class Test(unittest.TestCase):
 
     '''test fineElem'''
 
-    @given(st.lists(st.integers()))
-    def test_findElem(self, list1):
+    def test_findElem(self):
         tree1 = BinaryTree()
+        list1 = [2, 1, 3]
         tree1.from_list(list1)
         for value in list1:
             self.assertEqual(tree1.findElem(value)[0], True)
-        for value in range(20):
+        for value in [0, 4]:
             if value not in list1:
                 self.assertEqual(tree1.findElem(value)[0], False)
+        tree2 = BinaryTree()
+        list2 = []
+        tree2.from_list(list2)
+        self.assertEqual(tree2.findElem(0)[0], False)
 
     '''test add'''
 
