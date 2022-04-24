@@ -244,20 +244,11 @@ class BinaryTree(object):
     '''mconcat'''
 
     def mconcat(self, tree):
-        BT = BinaryTree()
-        if self.root and tree.root:
-            it1 = self.__iter__()
-            it2 = tree.__iter__()
-            while it1 < len(self.stack):
-                BT.add(self.stack[it1].ele)
-                it1 = self.__next__()
-            while it2 < len(tree.stack):
-                BT.add(tree.stack[it2].ele)
-                it2 = tree.__next__()
-            return BT
-        elif self.root is None and tree.root:
-            return tree
-        elif tree.root is None and self.root:
-            return self
+        if tree.root:
+            it = tree.__iter__()
+            while it < len(tree.stack):
+                self.add(tree.stack[it].ele)
+                it = tree.__next__()
+            return 
         else:
-            return BT
+            return 

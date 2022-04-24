@@ -19,11 +19,11 @@ and should check the implementation correctly works with None value.
 
 ## Features
 
-- PBT: `__iter__`, `__next__`, `findElem`, `add`,
+- PBT: `test_toAndfrom_list`, `test_findElem`, `test_add`, `test_delete`,
 
-`delete`, `getSize`, `to_list`, `from_list`, `filter`, `map`,
+`test_getSize`, `test_filter`, `test_map`, `test_reduce`, `test_monoid`,
 
-`reduce`, `monoid`
+`test_iter_next`
 
 ## Contribution
 
@@ -54,3 +54,10 @@ we also learned to use Hypothesis library to do the test.
 
 - 14.04.2022 - 0
   - Initial
+
+- 19.04.2022 - 1
+  - fix some problem
+    - rename test file from the mutable_test to binary_tree_mutable_test.
+    - add PBT to some test module.
+    - modify the mconcat function to mutable version, and modify correspondding test.
+    - make sure the map function won't the source of undifined behavior.

@@ -7,15 +7,11 @@ from binary_tree_mutable import *
 class Test(unittest.TestCase):
     '''test from_list and to_list'''
 
-    def test_toAndfrom_list(self):
-        list1 = []
+    @given(st.lists(st.integers()))
+    def test_toAndfrom_list(self, list1):
         tree1 = BinaryTree()
         tree1.from_list(list1)
-        self.assertEqual(tree1.to_list(), list1)
-        list2 = [2, 1, 3]
-        tree2 = BinaryTree()
-        tree2.from_list(list2)
-        self.assertEqual(tree2.to_list(), list2)
+        self.assertEqual(tree1.to_list().sort(), list(set(list1)).sort())
 
     '''test fineElem'''
 
@@ -82,15 +78,20 @@ class Test(unittest.TestCase):
     '''test map'''
 
     def test_map(self):
-        def plus1(data):
-            return data + 1
         tree1 = BinaryTree()
-        tree1.map(plus1)
+        tree1.map(str)
         self.assertEqual(tree1.to_list(), [])
-        list1 = [1, 2, 3, 4, 5]
-        tree1.from_list(list1)
-        tree1.map(plus1)
-        self.assertEqual(tree1.to_list(), [2, 3, 4, 5, 6])
+
+        tree2 = BinaryTree()
+        tree2.from_list([2, 1, 3])
+        tree2.map(str)
+        self.assertEqual(tree2.to_list(), ['2', '1', '3'])
+        tree3 = BinaryTree()
+        tree3.add(2)
+        tree3.add(1)
+        tree3.add(3)
+        tree3.map(str)
+        self.assertEqual(tree3.to_list(), ['2', '1', '3'])
 
     '''test reduce'''
 
@@ -116,23 +117,24 @@ class Test(unittest.TestCase):
         tree1.from_list([])
         tree2 = BinaryTree()
         tree2.from_list([])
-        mconcat1 = tree1.mconcat(tree2)
-        mconcat2 = tree2.mconcat(tree1)
-        self.assertEqual(mconcat1.to_list(), mconcat2.to_list())
+        self.assertEqual(tree1.to_list(), tree2.to_list())
 
         tree3 = BinaryTree()
         list3 = [1, 2, 3, 4]
         tree3.from_list(list3)
-        mconcat3 = tree3.mconcat(tree2)
-        mconcat4 = tree2.mconcat(tree3)
-        self.assertEqual(mconcat3.to_list(), mconcat4.to_list())
+        tree3.mconcat(tree2)
+        tree2.mconcat(tree3)
+        self.assertEqual(tree3.to_list(), tree2.to_list())
 
         tree4 = BinaryTree()
+        tree5 = BinaryTree()
         list4 = [3, 1, 5]
+        list5 = [1, 2, 3, 4]
         tree4.from_list(list4)
-        mconcat5 = tree3.mconcat(tree4)
-        mconcat6 = tree4.mconcat(tree3)
-        self.assertEqual(mconcat5.to_list().sort(), mconcat6.to_list().sort())
+        tree5.from_list(list5)
+        tree3.mconcat(tree4)
+        tree4.mconcat(tree5)
+        self.assertEqual(tree3.to_list().sort(), tree4.to_list().sort())
 
     '''test iter and next'''
 
