@@ -15,18 +15,15 @@ class Test(unittest.TestCase):
 
     '''test fineElem'''
 
-    def test_findElem(self):
-        list1 = [3, 1, 2, 4]
+    @given(st.lists(st.integers()))
+    def test_findElem(self, list1):
         tree1 = BinaryTree()
         tree1.from_list(list1)
-        self.assertEqual(tree1.findElem(1)[0], True)
-        self.assertEqual(tree1.findElem(3)[0], True)
-        self.assertEqual(tree1.findElem(2)[0], True)
-        self.assertEqual(tree1.findElem(5)[0], False)
-        list2 = []
-        tree2 = BinaryTree()
-        tree2.from_list(list2)
-        self.assertEqual(tree2.findElem(1)[0], False)
+        for value in list1:
+            self.assertEqual(tree1.findElem(value)[0], True)
+        for value in range(20):
+            if value not in list1:
+                self.assertEqual(tree1.findElem(value)[0], False)
 
     '''test add'''
 
@@ -49,12 +46,12 @@ class Test(unittest.TestCase):
 
     '''test getsize'''
 
-    def test_getSize(self):
+    @given(st.lists(st.integers()))
+    def test_getSize(self, list1):
         tree = BinaryTree()
         self.assertEqual(tree.getSize(), 0)
-        list1 = [1, 2, 3, 4]
         tree.from_list(list1)
-        self.assertEqual(tree.getSize(), len(list1))
+        self.assertEqual(tree.getSize(), len(set(list1)))
 
     '''test filter'''
 
