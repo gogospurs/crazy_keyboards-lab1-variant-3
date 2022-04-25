@@ -93,9 +93,10 @@ class Test(unittest.TestCase):
         tree3.add(3)
         tree3.map(str)
         self.assertEqual(tree3.to_list(), ['2', '1', '3'])
-        tree4= BinaryTree()
+        tree4 = BinaryTree()
         list2 = [-1, 1, 2]
         tree4.from_list(list2)
+        
         def abs_(value):
             if value < 0:
                 value = -value
