@@ -96,7 +96,7 @@ class Test(unittest.TestCase):
         tree4 = BinaryTree()
         list2 = [-1, 1, 2]
         tree4.from_list(list2)
-        
+
         def abs_(value):
             if value < 0:
                 value = -value
