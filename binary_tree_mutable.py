@@ -252,6 +252,7 @@ class BinaryTree(object):
         while it < len(self.stack):
             value += func(self.stack[self.it].ele)
             it = self.__next__()
+        self.stack = [value]   
         return value
 
     '''mempty'''
@@ -267,6 +268,7 @@ class BinaryTree(object):
             while it < len(tree.stack):
                 self.add(tree.stack[it].ele)
                 it = tree.__next__()
+            tree.__iter__()
             return
         else:
             return
