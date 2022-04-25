@@ -21,7 +21,7 @@ and should check the implementation correctly works with None value.
 
 - PBT: `test_toAndfrom_list`, `test_getSize`
 
-- other test module: `test_findElem`, `test_add`, `test_delete`,
+- other unit test: `test_findElem`, `test_add`, `test_delete`,
 
 `test_filter`, `test_map`, `test_reduce`, `test_monoid`, `test_iter_next`
 
@@ -56,8 +56,9 @@ we also learned to use Hypothesis library to do the test.
   - Initial
 
 - 24.04.2022 - 1
-  - fix some problem
+  - fix some bugs
     - rename test file from the mutable_test to binary_tree_mutable_test.
     - add PBT to some test module.
     - modify the mconcat function to mutable version, and modify correspondding test.
-    - make sure the map function won't be the source of undifined behavior.
+    - modify the map function to make sure it won't be the source of undifined behavior.
+    - fix the other bugs result from the above modifies

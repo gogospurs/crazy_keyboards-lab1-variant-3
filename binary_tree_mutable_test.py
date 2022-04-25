@@ -11,7 +11,7 @@ class Test(unittest.TestCase):
     def test_toAndfrom_list(self, list1):
         tree1 = BinaryTree()
         tree1.from_list(list1)
-        self.assertEqual(tree1.to_list().sort(), list(set(list1)).sort())
+        self.assertEqual(sorted(tree1.to_list()), sorted(list(set(list1))))
 
     '''test fineElem'''
 
@@ -74,7 +74,7 @@ class Test(unittest.TestCase):
         list2 = [11, 7, 5, 9, 4, 6, 8, 13]
         tree2.from_list(list2)
         tree2.filter(isEven)
-        self.assertEqual(tree2.to_list().sort(), [8, 6, 4].sort())
+        self.assertEqual(sorted(tree2.to_list()), sorted([8, 6, 4]))
 
     '''test map'''
 
@@ -93,6 +93,15 @@ class Test(unittest.TestCase):
         tree3.add(3)
         tree3.map(str)
         self.assertEqual(tree3.to_list(), ['2', '1', '3'])
+        tree4= BinaryTree()
+        list2 = [-1, 1, 2]
+        tree4.from_list(list2)
+        def abs_(value):
+            if value < 0:
+                value = -value
+            return value
+        tree4.map(abs_)
+        self.assertEqual(sorted(tree4.to_list()), sorted([1, 2]))
 
     '''test reduce'''
 
@@ -135,7 +144,7 @@ class Test(unittest.TestCase):
         tree5.from_list(list5)
         tree3.mconcat(tree4)
         tree4.mconcat(tree5)
-        self.assertEqual(tree3.to_list().sort(), tree4.to_list().sort())
+        self.assertEqual(sorted(tree3.to_list()), sorted(tree4.to_list()))
 
     '''test iter and next'''
 

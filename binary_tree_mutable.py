@@ -174,14 +174,18 @@ class BinaryTree(object):
 
     def to_list(self):
         res = []
-        self.__iter__()
-        if self.it is None:
+        currNode = self.root
+        if currNode is None:
             return res
         else:
-            while self.it < len(self.stack):
-                node = self.stack[self.it]
-                res.append(node.ele)
-                self.__next__()
+            queue = [self.root]
+            while queue:
+                currNode = queue.pop(0)
+                res.append(currNode.ele)
+                if currNode.left:
+                    queue.append(currNode.left)
+                if currNode.right:
+                    queue.append(currNode.right)
         return res
 
     '''from list'''
@@ -207,9 +211,9 @@ class BinaryTree(object):
                 if func(value) is False:
                     de_stack.append(self.stack[self.it])
                     self.stack.pop(self.it)
-                self.__next__()
+                else:
+                    self.__next__()
             for item in de_stack:
-                # self.stack.remove(item)
                 self.delete(item.ele)
             return
 
@@ -220,6 +224,20 @@ class BinaryTree(object):
         if self.it is None:
             return
         else:
+            map_queue = []
+            delete_queue = []
+            while self.it < len(self.stack):
+                currNode = self.stack[self.it]
+                map_value = func(currNode.ele)
+                if map_value in map_queue:
+                    delete_queue.append(currNode)
+                else:
+                    map_queue.append(map_value)
+                self.__next__()
+            for value in delete_queue:
+                self.delete(value.ele)
+                self.stack.remove(value)
+            self.it = self.__iter__()
             while self.it < len(self.stack):
                 currNode = self.stack[self.it]
                 currNode.ele = func(currNode.ele)
