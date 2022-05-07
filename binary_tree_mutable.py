@@ -45,7 +45,8 @@ class BinaryTree(object):
             return self.it
 
     def findElem(self, item: int) -> typing.Tuple[bool,
-                 typing.Optional[TreeNode], typing.Optional[TreeNode]]:
+                                                  typing.Optional[TreeNode],
+                                                  typing.Optional[TreeNode]]:
         '''find the node which its elem equal to the item,
         if not exists, return False'''
         parentNode = None
