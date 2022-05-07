@@ -3,7 +3,7 @@ import typing
 
 class TreeNode():
     def __init__(self, elem: int, left: typing.Optional['TreeNode'] = None,
-                right: typing.Optional['TreeNode'] = None) -> None:
+                 right: typing.Optional['TreeNode'] = None) -> None:
         '''initial function'''
         self.ele = elem
         self.left = left
@@ -45,7 +45,7 @@ class BinaryTree(object):
             return self.it
 
     def findElem(self, item: int) -> typing.Tuple[bool,
-                typing.Optional[TreeNode], typing.Optional[TreeNode]]:
+                 typing.Optional[TreeNode], typing.Optional[TreeNode]]:
         '''find the node which its elem equal to the item,
         if not exists, return False'''
         parentNode = None
