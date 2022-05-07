@@ -19,11 +19,11 @@ and should check the implementation correctly works with None value.
 
 ## Features
 
-- PBT: `test_toAndfrom_list`, `test_getSize`
+- PBT: `test_toAndfrom_list`, `test_getSize`, `test_monoid`
 
 - other unit test: `test_findElem`, `test_add`, `test_delete`,
 
-`test_filter`, `test_map`, `test_reduce`, `test_monoid`, `test_iter_next`
+`test_filter`, `test_map`, `test_reduce`, `test_iter_next`
 
 ## Contribution
 
@@ -62,3 +62,9 @@ we also learned to use Hypothesis library to do the test.
     - modify the mconcat function to mutable version, and modify correspondding test.
     - modify the map function to make sure it won't be the source of undifined behavior.
     - fix the other bugs result from the above modifies
+
+- 07.05.2022 - 2
+  - fix some bugs
+    - add PBT for monoid properties
+    - add type hints
+    - add docstrings for all function

@@ -123,29 +123,24 @@ class Test(unittest.TestCase):
 
     '''test monoid'''
 
-    def test_monoid(self):
+    @given(st.lists(st.integers()))
+    def test_monoid(self, list1):
         tree1 = BinaryTree()
         tree1.from_list([])
         tree2 = BinaryTree()
-        tree2.from_list([])
-        self.assertEqual(tree1.to_list(), tree2.to_list())
-
+        tree2.from_list(list1)
         tree3 = BinaryTree()
-        list3 = [1, 2, 3, 4]
-        tree3.from_list(list3)
+        tree3.from_list([])
         tree3.mconcat(tree2)
-        tree2.mconcat(tree3)
-        self.assertEqual(tree3.to_list(), tree2.to_list())
-
+        tree2.mconcat(tree1)
+        self.assertEqual(sorted(tree2.to_list()), sorted(tree3.to_list()))
         tree4 = BinaryTree()
+        tree4.from_list([4, 2, 3, 1])
         tree5 = BinaryTree()
-        list4 = [3, 1, 5]
-        list5 = [1, 2, 3, 4]
-        tree4.from_list(list4)
-        tree5.from_list(list5)
-        tree3.mconcat(tree4)
-        tree4.mconcat(tree5)
-        self.assertEqual(sorted(tree3.to_list()), sorted(tree4.to_list()))
+        tree5.from_list([4, 2, 1, 3])
+        tree4.mconcat(tree2)
+        tree2.mconcat(tree5)
+        self.assertEqual(sorted(tree2.to_list()), sorted(tree4.to_list()))
 
     '''test iter and next'''
 
