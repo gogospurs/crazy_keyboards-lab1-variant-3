@@ -3,12 +3,11 @@ import typing
 
 class TreeNode():
     def __init__(self, elem: int, left: typing.Optional['TreeNode'] = None,
-    right: typing.Optional['TreeNode'] = None) -> None:
+                right: typing.Optional['TreeNode'] = None) -> None:
         '''initial function'''
         self.ele = elem
         self.left = left
         self.right = right
-
 
 
 class BinaryTree(object):
@@ -46,8 +45,9 @@ class BinaryTree(object):
             return self.it
 
     def findElem(self, item: int) -> typing.Tuple[bool,
-    typing.Optional[TreeNode], typing.Optional[TreeNode]]:
-        '''find the node which its elem equal to the item, if not exists, return False'''
+                typing.Optional[TreeNode], typing.Optional[TreeNode]]:
+        '''find the node which its elem equal to the item,
+        if not exists, return False'''
         parentNode = None
         currNode = None
         if self.root is None:
@@ -104,7 +104,7 @@ class BinaryTree(object):
                         queue.append(currNode.left)
                     else:
                         currNode.left = node
-                        res =  True
+                        res = True
                         break
                 else:          # if the item is larger than the currNode.ele
                     if currNode.right:
@@ -119,7 +119,7 @@ class BinaryTree(object):
         '''delete the item, if not exist, return False'''
         # search the item wheather in the set
         res, parentNode, currNode = self.findElem(item)
-        if res == False:
+        if not res:
             # if item does not in the set, return false
             return False
         else:
@@ -214,7 +214,7 @@ class BinaryTree(object):
                     self.__next__()
             for item in de_stack:
                 self.delete(item.ele)
-        return 
+        return
 
     def map(self, func: typing.Callable[[int], typing.Any]) -> None:
         '''map the node, the rule is defined by func'''
