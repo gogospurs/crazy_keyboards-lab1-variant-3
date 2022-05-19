@@ -1,20 +1,23 @@
-import typing
+from typing import Optional, TypeVar, Tuple, Callable, Generic, Union
+from typing import List, Any
+
+T = Union[int, float]
 
 
-class TreeNode():
-    def __init__(self, elem: int, left: typing.Optional['TreeNode'] = None,
-                 right: typing.Optional['TreeNode'] = None) -> None:
+class TreeNode(object):
+    def __init__(self, elem: T, left: Optional['TreeNode'] = None,
+                 right: Optional['TreeNode'] = None) -> None:
         '''initial function'''
-        self.ele = elem
+        self.ele: T = elem
         self.left = left
         self.right = right
 
 
 class BinaryTree(object):
-    def __init__(self, root: typing.Optional['TreeNode'] = None) -> None:
+    def __init__(self, root: Optional['TreeNode'] = None) -> None:
         '''initial function'''
         self.root = root
-        self.stack: typing.List[TreeNode] = []
+        self.stack: List[TreeNode] = []
         self.it = -1
 
     def __iter__(self) -> int:
@@ -44,9 +47,8 @@ class BinaryTree(object):
             self.it += 1
             return self.it
 
-    def findElem(self, item: int) -> typing.Tuple[bool,
-                                                  typing.Optional[TreeNode],
-                                                  typing.Optional[TreeNode]]:
+    def findElem(self, item: T) -> Tuple[bool,Optional[TreeNode],
+                                           Optional[TreeNode]]:
         '''find the node which its elem equal to the item,
         if not exists, return False'''
         parentNode = None
@@ -58,11 +60,11 @@ class BinaryTree(object):
             queue = [self.root]
             while queue:
                 currNode = queue.pop(0)
-                if currNode.ele == item:
+                if abs(currNode.ele - item) < 1e-9:
                     res = True
                     # if item is equal to the root.ele, return node
                     break
-                elif currNode.ele > item:
+                elif currNode.ele - item > 0:
                     if currNode.left is not None:
                         parentNode = currNode
                         # search the left child tree
@@ -84,7 +86,7 @@ class BinaryTree(object):
                         break
         return (res, parentNode, currNode)
 
-    def add(self, item: int) -> bool:
+    def add(self, item: T) -> bool:
         '''add node to tree, if the value is exists, return False'''
         node = TreeNode(item)           # instance of the node
         res: bool = False
@@ -95,11 +97,11 @@ class BinaryTree(object):
             queue = [self.root]
             while queue:
                 currNode = queue.pop(0)
-                if currNode.ele == item:  # if the item is already in the set
+                if abs(currNode.ele - item) < 1e-9:  # if the item is already in the set
                     print("the item is already in the set")
                     res = False
                     break
-                elif currNode.ele > item:
+                elif currNode.ele - item > 0:
                     if currNode.left:
                         # if the item is smaller than the currNode.ele
                         queue.append(currNode.left)
@@ -116,7 +118,7 @@ class BinaryTree(object):
                         break
         return res
 
-    def delete(self, item: int) -> bool:
+    def delete(self, item: T) -> bool:
         '''delete the item, if not exist, return False'''
         # search the item wheather in the set
         res, parentNode, currNode = self.findElem(item)
@@ -125,8 +127,8 @@ class BinaryTree(object):
             return False
         else:
             if currNode:
-                parentOfInsteadNode: typing.Optional[TreeNode] = None
-                insteadNode: typing.Optional[TreeNode] = None
+                parentOfInsteadNode: Optional[TreeNode] = None
+                insteadNode: Optional[TreeNode] = None
                 if currNode.left is not None:
                     parentOfInsteadNode = currNode
                     insteadNode = currNode.left
@@ -178,9 +180,9 @@ class BinaryTree(object):
                     queue.append(currNode.right)
             return size
 
-    def to_list(self) -> typing.List[typing.Any]:
+    def to_list(self) -> List[Any]:
         '''transfer tree to list'''
-        res: typing.List[typing.Any] = []
+        res: List[Any] = []
         if self.root is None:
             return res
         else:
@@ -194,14 +196,14 @@ class BinaryTree(object):
                     queue.append(currNode.right)
         return res
 
-    def from_list(self, tlist: typing.List[typing.Any]) -> None:
+    def from_list(self, tlist: List[Any]) -> None:
         '''build tree from list'''
         if tlist != []:
             for i in tlist:
                 self.add(i)
         return
 
-    def filter(self, func: typing.Callable[[int], bool]) -> None:
+    def filter(self, func: Callable[[T], bool]) -> None:
         '''filter the node, the rule is defined by func'''
         self.it = self.__iter__()
         if self.it != -1:
@@ -217,7 +219,7 @@ class BinaryTree(object):
                 self.delete(item.ele)
         return
 
-    def map(self, func: typing.Callable[[int], typing.Any]) -> None:
+    def map(self, func: Callable[[T], Any]) -> None:
         '''map the node, the rule is defined by func'''
         self.it = self.__iter__()
         if self.it == -1:
@@ -243,10 +245,10 @@ class BinaryTree(object):
                 self.__next__()
             return
 
-    def reduce(self, func: typing.Callable[[int], int]) -> int:
+    def reduce(self, func: Callable[[T], T]) -> T:
         '''reduce the tree node to int'''
         it = self.__iter__()
-        value = 0
+        value: T = 0
         while it < len(self.stack):
             value += func(self.stack[self.it].ele)
             it = self.__next__()

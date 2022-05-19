@@ -1,4 +1,4 @@
-import typing
+from typing import Union
 import unittest
 from hypothesis import given
 import hypothesis.strategies as st
@@ -7,8 +7,8 @@ from binary_tree_mutable import *
 
 class Test(unittest.TestCase):
     @given(st.lists(st.integers()))
-    def test_toAndfrom_list(self, list1: typing.List[int]) -> None:
-        '''test from_list and to_list'''
+    def test_toAndfrom_list(self, list1: List[T]) -> None:
+        '''test from_list and to_list int version'''
         tree1 = BinaryTree()
         tree1.from_list(list1)
         self.assertEqual(sorted(tree1.to_list()), sorted(list(set(list1))))
@@ -16,15 +16,15 @@ class Test(unittest.TestCase):
     def test_findElem(self) -> None:
         '''test fineElem'''
         tree1 = BinaryTree()
-        list1: typing.List[int] = [2, 1, 3]
+        list1: List[Union[int, float]] = [2, 1.0, 3.1]
         tree1.from_list(list1)
         for value in list1:
             self.assertEqual(tree1.findElem(value)[0], True)
-        for value in [0, 4]:
+        for value in [2.0, 3]:
             if value not in list1:
                 self.assertEqual(tree1.findElem(value)[0], False)
         tree2 = BinaryTree()
-        list2: typing.List[int] = []
+        list2: List[T] = []
         tree2.from_list(list2)
         self.assertEqual(tree2.findElem(0)[0], False)
 
@@ -34,7 +34,7 @@ class Test(unittest.TestCase):
         self.assertEqual(tree1.add(2), True)
         self.assertEqual(tree1.add(2), False)
         self.assertEqual(tree1.add(1), True)
-        self.assertEqual(tree1.add(3), True)
+        self.assertEqual(tree1.add(3.0), True)
 
     def test_delete(self) -> None:
         '''test delete'''
@@ -46,7 +46,7 @@ class Test(unittest.TestCase):
         self.assertEqual(tree.delete(8), True)
 
     @given(st.lists(st.integers()))
-    def test_getSize(self, list1: typing.List[int]) -> None:
+    def test_getSize(self, list1: List[T]) -> None:
         '''test getsize'''
         tree = BinaryTree()
         self.assertEqual(tree.getSize(), 0)
@@ -55,18 +55,18 @@ class Test(unittest.TestCase):
 
     def test_filter(self) -> None:
         '''test filter'''
-        def isEven(data: int) -> bool:
+        def isEven(data: T) -> bool:
             if data % 2 == 0:
                 return True
             else:
                 return False
         tree1 = BinaryTree()
-        list1: typing.List[int] = [1, 2, 3, 4]
+        list1: List[T] = [1, 2, 3, 4]
         tree1.from_list(list1)
         tree1.filter(isEven)
         self.assertEqual(tree1.to_list(), [2, 4])
         tree2 = BinaryTree()
-        list2: typing.List[int] = [11, 7, 5, 9, 4, 6, 8, 13]
+        list2: List[T] = [11, 7, 5, 9, 4, 6, 8, 13]
         tree2.from_list(list2)
         tree2.filter(isEven)
         self.assertEqual(sorted(tree2.to_list()), sorted([8, 6, 4]))
@@ -88,10 +88,10 @@ class Test(unittest.TestCase):
         tree3.map(str)
         self.assertEqual(tree3.to_list(), ['2', '1', '3'])
         tree4 = BinaryTree()
-        list2: typing.List[int] = [-1, 1, 2]
+        list2: List[T] = [-1, 1, 2]
         tree4.from_list(list2)
 
-        def abs_(value: int) -> int:
+        def abs_(value: T) -> T:
             if value < 0:
                 value = -value
             return value
@@ -100,10 +100,10 @@ class Test(unittest.TestCase):
 
     def test_reduce(self) -> None:
         '''test reduce'''
-        def sum1(data: int) -> int:
+        def sum1(data: T) -> T:
             return data
         tree1 = BinaryTree()
-        list1: typing.List[int] = [1, 2, 3]
+        list1: List[T] = [1, 2, 3]
         tree1.from_list(list1)
         self.assertEqual(tree1.reduce(sum1), 6)
 
@@ -114,7 +114,7 @@ class Test(unittest.TestCase):
         self.assertEqual(mempty.to_list(), BinaryTree().to_list())
 
     @given(st.lists(st.integers()))
-    def test_monoid(self, list1: typing.List[int]) -> None:
+    def test_monoid(self, list1: List[T]) -> None:
         '''test monoid'''
         tree1 = BinaryTree()
         tree1.from_list([])
@@ -136,7 +136,7 @@ class Test(unittest.TestCase):
     def test_iter_next(self) -> None:
         '''test iter and next'''
         tree1 = BinaryTree()
-        list1: typing.List[int] = [1, 2, 3, 4]
+        list1: List[T] = [1, 2, 3, 4]
         tree1.from_list(list1)
         it = tree1.__iter__()
         for i in list1:
