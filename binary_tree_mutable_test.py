@@ -1,4 +1,4 @@
-from typing import Union
+from typing import List, Union
 import unittest
 from hypothesis import given
 import hypothesis.strategies as st
