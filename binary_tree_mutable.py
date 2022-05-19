@@ -48,7 +48,7 @@ class BinaryTree(object):
             return self.it
 
     def findElem(self, item: T) -> Tuple[bool,Optional[TreeNode],
-                                           Optional[TreeNode]]:
+                                        Optional[TreeNode]]:
         '''find the node which its elem equal to the item,
         if not exists, return False'''
         parentNode = None
@@ -97,7 +97,8 @@ class BinaryTree(object):
             queue = [self.root]
             while queue:
                 currNode = queue.pop(0)
-                if abs(currNode.ele - item) < 1e-9:  # if the item is already in the set
+                # if the item is already in the set
+                if abs(currNode.ele - item) < 1e-9:
                     print("the item is already in the set")
                     res = False
                     break
