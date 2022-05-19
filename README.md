@@ -52,8 +52,14 @@ we also learned to use Hypothesis library to do the test.
 
 ## Changelog
 
-- 14.04.2022 - 0
-  - Initial
+- 19.05.2022 - 3
+  - make data structure parametrised by types
+
+- 07.05.2022 - 2
+  - fix some bugs
+    - add PBT for monoid properties
+    - add type hints
+    - add docstrings for all function
 
 - 24.04.2022 - 1
   - fix some bugs
@@ -63,8 +69,5 @@ we also learned to use Hypothesis library to do the test.
     - modify the map function to make sure it won't be the source of undifined behavior.
     - fix the other bugs result from the above modifies
 
-- 07.05.2022 - 2
-  - fix some bugs
-    - add PBT for monoid properties
-    - add type hints
-    - add docstrings for all function
+- 14.04.2022 - 0
+  - Initial
